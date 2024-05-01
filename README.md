@@ -1,7 +1,10 @@
 # Meross Prometheus Exporter
-Exports power consumption from Meross mss310 power switches as prometheus compatible metrics.
+Exports power consumption from Meross mss310,mss310x power switches as prometheus compatible metrics.
 
 Based on [MerossIot python library by albertogeniolia](https://github.com/albertogeniola/MerossIot)
+
+*Should* be able to detect all smart outlets with power monitoring. Tested with:
+- mss310x
 
 ## Usage
 ```sh
@@ -48,5 +51,4 @@ Labels:
 - **type** - The type of device (currently only mss310s are scraped)
 
 ## To Do
-- Test using a more generic device filter (i.e. `meross_iot.controller.mixins.electricity.ElectricityMixin`)
 - Use python built in logging

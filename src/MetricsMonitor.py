@@ -3,6 +3,7 @@ from prometheus_client import Gauge
 from ConnectionManager import ConnectionManager
 from MonitorCache import MonitorCache
 from Logger import Logger
+from meross_iot.controller.mixins.electricity import ElectricityMixin
 
 num_devices = Gauge("meross_metricsmonitor_devices", "Number of devices being monitored.")
 monitor_consumption= Gauge("meross_monitor_consumption", "Power consumption (W)", ["id", "name", "type"])
@@ -21,7 +22,7 @@ class MetricsMonitor:
         manager = await self._connections.get_meross_manager()
 
         await manager.async_device_discovery()
-        found_monitors = manager.find_devices(device_type="mss310")
+        found_monitors = manager.find_devices(device_class=ElectricityMixin)
         self._logger.info("Device discovery complete.")
         num_devices.set_function(lambda: len(found_monitors))
 
